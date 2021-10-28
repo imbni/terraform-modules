@@ -34,12 +34,12 @@ COPY --from=builder /usr/bin/terraform /usr/bin/terraform
 COPY --from=builder /etc/ssl/certs/ /etc/ssl/certs
 
 
-COPY ./*.tf /
-# COPY ./cluster.tf /
+COPY ./provider.tf /
+COPY ./cluster.tf /
 COPY ./auth.json /
 
-# ENTRYPOINT [ "terraform" ]
+ENTRYPOINT [ "terraform" ]
 RUN terraform init
 RUN terraform plan
-# RUN terraform apply -auto-approve
+RUN terraform apply -auto-approve
 
